@@ -1,7 +1,8 @@
 require 'FileUtils'
-FileUtils.mkdir_p(File.expand_path('~/.git/'))
-sources = ['coverbox.sh', 'git-wtf.rb'].map{|file| File.expand_path(File.join(File.dirname(__FILE__), file))}
-FileUtils.cp(sources, File.expand_path('~/.git/'))
+basedir = File.expand_path('~/.my_git/')
+FileUtils.mkdir_p(basedir)
+sources = ['coverbox.sh', 'coverbox_functions.sh', 'git-wtf.rb', 'bash_prompt.sh'].map{|file| File.expand_path(File.join(File.dirname(__FILE__), file))}
+FileUtils.cp(sources, basedir)
 
 File.open(File.expand_path('~/.gitconfig'), 'a') do |file|
   file.puts File.read(File.expand_path(File.join(File.dirname(__FILE__), 'gitconfig')))

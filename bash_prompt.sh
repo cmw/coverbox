@@ -1,7 +1,6 @@
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
- 
+#!/bin/bash
+source ~/.my_git/coverbox_functions.sh
+
 function proml {
   local        BLUE="\[\033[0;34m\]"
   local         RED="\[\033[0;31m\]"
@@ -20,7 +19,7 @@ function proml {
   esac
  
 PS1="${TITLEBAR}\
-$RED[ $LIGHT_GRAY\w $GREEN\$(parse_git_branch) $RED]\n\
+$RED[$GREEN\$(parse_git_root)\$(parse_git_branch) $LIGHT_GRAY\w $RED]\n\
 $BLUE[ $LIGHT_GRAY\$(date +%H:%M)$BLUE ] \
 $LIGHT_GREEN\$$LIGHT_GRAY "
 PS2='> '
