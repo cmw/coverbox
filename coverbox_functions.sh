@@ -15,7 +15,7 @@ function parse_git_root () {
 }
  
 function add_remote () {
-  branchname=$0
+  branchname=$1
   git config branch.$branchname.remote origin
   git config branch.$branchname.merge refs/heads/$branchname
 }
