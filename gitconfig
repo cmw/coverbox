@@ -10,3 +10,4 @@
 	rid               = !bash ~/.my_git/coverbox.sh local_change rid 
 
 	wtf               = !sh -c 'ruby ~/.my_git/git-wtf.rb'
+	sms               = submodule foreach git status
