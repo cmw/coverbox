@@ -75,8 +75,10 @@ function rid () {
 }
 
 function submodule_status () {
-  git_root
+  pushd . > /dev/null
+  cd `git_root`
   git submodule foreach "git status; true"
+  popd > /dev/null
 }
 
 function pull_with_submodules () {
