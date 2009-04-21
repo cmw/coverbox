@@ -9,5 +9,7 @@
 	receive           = !bash ~/.my_git/coverbox.sh local_change receive 
 	rid               = !bash ~/.my_git/coverbox.sh local_change rid 
 
+	sms               = !bash ~/.my_git/coverbox.sh submodule status 
+	spull             = !bash ~/.my_git/coverbox.sh submodule pull 
+
 	wtf               = !sh -c 'ruby ~/.my_git/git-wtf.rb'
-	sms               = submodule foreach git status

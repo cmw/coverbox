@@ -4,16 +4,20 @@ function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
  
-function parse_git_root () {
+function git_root () {
   pushd . > /dev/null
   until [ -d ".git" ] || [ "`pwd`" = "/" ] ; do cd .. ; done
   if [ "`pwd`" != "/" ]
   then
-    pwd | sed -e 's/.*\/\([^\/]*\)/(\1)/'
+    pwd
   fi
   popd > /dev/null
 }
  
+function parse_git_root () {
+  git_root | sed -e 's/.*\/\([^\/]*\)/(\1)/'
+}
+
 function add_remote () {
   branchname=$1
   git config branch.$branchname.remote origin
@@ -68,4 +72,18 @@ function rid () {
   git branch -d $branchname
   del_remote $branchname
   del_track $branchname
+}
+
+function submodule_status () {
+  git_root
+  git submodule foreach "git status; true"
+}
+
+function pull_with_submodules () {
+  git pull $*
+  pushd . > /dev/null
+  cd `git_root`
+  git submodule init
+  git submodule update
+  popd > /dev/null
 }

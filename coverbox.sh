@@ -54,4 +54,20 @@ case "$1" in
     ;;
   esac
   ;;
+  
+  "submodule")
+  case "$2" in
+    "pull")
+    pull_with_submodules `echo $* | cut -d \  -f 3-`
+    ;;
+    
+    "status")
+    submodule_status
+    ;;
+  esac
+  ;;
+  
+  "root")
+  cd `git_root`
+  ;;
 esac
